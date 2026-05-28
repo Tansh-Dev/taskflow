@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # ── Backend (Node.js API) ──────────────────────────
+  backend:
+    build: ./backend
+    container_name: taskflow-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+    volumes:
+      - taskflow-data:/app/data   # ← This is what saves your data!
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Frontend (Nginx serving HTML) ─────────────────
+  frontend:
+    build: ./frontend
+    container_name: taskflow-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+# ── Named volume (Docker manages this folder) ───────
+volumes:
+  taskflow-data:
+    name: taskflow-data
