@@ -44,6 +44,7 @@ docker compose up --build
 ---
 
 ## 🌐 Stage 2: Nginx reverse proxy + SSL (coming next)
+doing this
 
 ## ☁️ Stage 3: Deploy to AWS EC2 (coming next)
 
