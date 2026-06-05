@@ -51,7 +51,7 @@ doing this
 ## ⚙️ Stage 4: GitHub Actions CI/CD (coming next)
 ##          CI/CD pipeline working! 🚀
 ---
-
+CI/CD pipeline working! 🚀
 ## API Endpoints
 
 | Method | Endpoint         | Description      |
