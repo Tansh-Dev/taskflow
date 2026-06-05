@@ -49,7 +49,7 @@ doing this
 ## ☁️ Stage 3: Deploy to AWS EC2 (coming next)
 
 ## ⚙️ Stage 4: GitHub Actions CI/CD (coming next)
-
+##          CI/CD pipeline working! 🚀
 ---
 
 ## API Endpoints
