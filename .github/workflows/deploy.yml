@@ -1,0 +1,39 @@
+name: Deploy TaskFlow to EC2
+
+# Trigger: runs automatically on every push to main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to AWS EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1 — Checkout code (GitHub Actions downloads your repo)
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2 — Connect to EC2 and deploy
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # Go to project folder
+            cd ~/taskflow
+
+            # Pull latest code from GitHub
+            git pull origin main
+
+            # Rebuild and restart containers
+            docker compose up --build -d
+
+            # Remove old unused images (keeps server clean)
+            docker image prune -f
+
+            echo "✅ Deployment complete!"
