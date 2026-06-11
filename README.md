@@ -60,3 +60,5 @@ doing this
 | PATCH  | /api/tasks/:id  | Update task      |
 | DELETE | /api/tasks/:id  | Delete task      |
 | GET    | /health         | Health check     |
+
+## Next stage coming soon
